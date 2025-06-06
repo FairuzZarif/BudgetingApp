@@ -8,6 +8,6 @@ namespace BudgetingApp.Data
         public BudgetingAppContext(DbContextOptions<BudgetingAppContext> options) : base(options) { } // Constructor that accepts DbContextOptions for configuration
 
         // instance of DbSet for managing expenses in the database
-        DbSet<Expense> Expenses { get; set; } // DbSet for managing expenses in the database
+        public DbSet<Expense> Expenses { get; set; } // DbSet for managing expenses in the database
     }
 }
