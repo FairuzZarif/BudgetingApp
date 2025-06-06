@@ -1,4 +1,5 @@
 using BudgetingApp.Data;
+using BudgetingApp.Data.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BudgetingAppContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
+builder.Services.AddScoped<IExpensesService, ExpensesService>();
 // Register the DbContext with dependency injection using SQL Server as the database provider
 var app = builder.Build();
 

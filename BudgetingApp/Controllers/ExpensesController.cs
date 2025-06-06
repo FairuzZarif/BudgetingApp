@@ -1,4 +1,5 @@
 ﻿using BudgetingApp.Data;
+using BudgetingApp.Data.Service;
 using BudgetingApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,14 +8,14 @@ namespace BudgetingApp.Controllers
 {
     public class ExpensesController : Controller
     {
-        private readonly BudgetingAppContext _context;
-        public ExpensesController(BudgetingAppContext context)
+        private readonly IExpensesService _expensesService;
+        public ExpensesController(IExpensesService expensesService)
         {
-            _context = context;
+            _expensesService = expensesService;
         }
         public async Task<IActionResult> Index() // Displays a list of expenses
         {
-            var expenses = await _context.Expenses.ToListAsync(); // Fetches all expenses from the database
+            var expenses = await _expensesService.GetAll(); // Fetches all expenses from the database
             return View(expenses); // Returns the view with the list of expenses
         }
         public IActionResult Create() 
@@ -26,8 +27,8 @@ namespace BudgetingApp.Controllers
         {
             if (ModelState.IsValid) 
             {
-                _context.Expenses.Add(expense); // Adds the new expense to the database context
-                _context.SaveChangesAsync(); // Saves changes to the database
+                await _expensesService.Add(expense); // Adds the new expense to the database if the model state is valid
+
 
                 return RedirectToAction("Index"); // Redirects to the Index action to display the updated list of expenses
             }
