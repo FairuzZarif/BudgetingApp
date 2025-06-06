@@ -6,5 +6,6 @@ namespace BudgetingApp.Data.Service
     {
         Task<IEnumerable<Expense>> GetAll(); // Fetches all expenses asynchronously
         Task Add(Expense expense); // Adds a new expense asynchronously
+        IQueryable GetChartData();
     }
 }

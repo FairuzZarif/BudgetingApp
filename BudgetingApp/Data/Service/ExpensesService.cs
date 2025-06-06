@@ -23,5 +23,17 @@ namespace BudgetingApp.Data.Service
             var expenses = await _context.Expenses.ToListAsync();
             return expenses; // Returns all expenses from the database as an IEnumerable<Expense>
         }
+
+        public IQueryable GetChartData()
+        {
+            var data = _context.Expenses // Fetching all expenses from the database
+                               .GroupBy(e => e.Category) // Grouping expenses by Category
+                               .Select(g => new // Projected data for charting
+                               {
+                                   Category = g.Key, // Grouping by Category
+                                   Total = g.Sum(e => e.Amount) // Summing up the Amount for each category
+                               });
+            return data; // Returns the grouped and summed data as an IQueryable for further processing or querying
+        }
     }
 }

@@ -34,5 +34,10 @@ namespace BudgetingApp.Controllers
             }
             return View(expense); // Returns the view for creating a new expense
         }
+        public IActionResult GetChart() 
+        {
+            var data = _expensesService.GetChartData(); // Fetches chart data from the service
+            return Json(data); // Returns the data as JSON for charting purposes
+        }
     }
 }
