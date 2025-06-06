@@ -1,28 +1,28 @@
 ﻿@model IEnumerable<BudgetingApp.Models.Expense> // Ensure the model is correctly set to the Expense type
 
 <h2>My Expenses</h2>
-<div class=" = "container">
-    <table class = "table table-bordered">
+<div class= "container">
+    <table class="table table-bordered">
         <thead class="table-light">
             <tr>
-                <th>Id</th>
                 <th>Description</th>
                 <th>Amount</th>
-                <th>Date</th>
                 <th>Category</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach(var item in Model)
             {
                 <tr>
-                    <td>@item.Id</td>
                     <td>@item.Description</td>
-                    <td>@item.Amount $</td> <!-- Format as currency -->
-                    <td>@item.Date.ToString("YYYY-MM-DD")</td> <!-- Format date -->
-                    <td>@item.Category</td> <!-- Assuming Category is a navigation property -->
+                    <td>@item.Amount $</td> <!-- Format amount as currency -->
+                    <td>@item.Category</td>
+                    <td>@item.Date.ToString("yyyy-MM-dd")</td> <!-- Format date to short date string -->
                 </tr>
             }
+)
         </tbody>
     </table>
+
 </div>

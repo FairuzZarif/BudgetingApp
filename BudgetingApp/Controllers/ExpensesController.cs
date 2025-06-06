@@ -1,4 +1,5 @@
 ﻿using BudgetingApp.Data;
+using BudgetingApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetingApp.Controllers
@@ -18,6 +19,18 @@ namespace BudgetingApp.Controllers
         public IActionResult Create() 
         {
             return View(); // Returns the view for creating a new expense
+        }
+        [HttpPost] // Indicates that this action method responds to HTTP POST requests
+        public IActionResult Create(Expense expense)
+        {
+            if (ModelState.IsValid) 
+            {
+                _context.Expenses.Add(expense); // Adds the new expense to the database context
+                _context.SaveChanges(); // Saves changes to the database
+
+                return RedirectToAction("Index"); // Redirects to the Index action to display the updated list of expenses
+            }
+            return View(expense); // Returns the view for creating a new expense
         }
     }
 }
